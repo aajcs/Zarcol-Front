@@ -209,7 +209,7 @@ function ContactoList() {
         <Column field="tipo" header="Tipo" sortable style={{ width: "20%" }} />
         <Column
           field="id_empresa.nombre"
-          header="ID Refinería"
+          header="ID Empresa"
           sortable
           style={{ width: "20%" }}
         />

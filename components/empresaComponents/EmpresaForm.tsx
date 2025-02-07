@@ -85,7 +85,7 @@ function EmpresaForm({
           toast.current?.show({
             severity: "success",
             summary: "Éxito",
-            detail: "Refinería Actualizada",
+            detail: "Empresa Actualizada",
             life: 3000,
           });
 
@@ -111,7 +111,7 @@ function EmpresaForm({
         toast.current?.show({
           severity: "success",
           summary: "Éxito",
-          detail: "Refinería Creada",
+          detail: "Empresa Creada",
           life: 3000,
         });
 
@@ -137,7 +137,7 @@ function EmpresaForm({
       <Toast ref={toast} />
       {!empresa && (
         <span className="text-900 text-xl font-bold mb-4 block">
-          Crear Refinería
+          Crear Empresa
         </span>
       )}
       <div className="grid">
@@ -261,7 +261,7 @@ function EmpresaForm({
               <div className="col-12">
                 <Button
                   type="submit"
-                  label={empresa ? "Modificar Refinería" : "Crear Refinería"}
+                  label={empresa ? "Modificar Empresa" : "Crear Empresa"}
                   className="w-auto mt-3"
                 />
               </div>
