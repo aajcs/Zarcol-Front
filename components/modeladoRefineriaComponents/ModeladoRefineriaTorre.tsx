@@ -1,6 +1,6 @@
 import React, { useEffect, useState, SVGProps } from "react";
-import ModeladoRefineriaTorreSVG from "./ModeladoRefineriaTorreSVG";
-import ModeladoRefineriaTuberiaMaterial from "./ModeladoRefineriaTuberiaMaterial";
+import ModeladoEmpresaTorreSVG from "./ModeladoEmpresaTorreSVG";
+import ModeladoEmpresaTuberiaMaterial from "./ModeladoEmpresaTuberiaMaterial";
 interface TorreProps {
   torre: {
     id: string;
@@ -15,13 +15,13 @@ interface TorreProps {
     }[];
     createdAt: string;
     updatedAt: string;
-    id_refineria: {
+    id_empresa: {
       _id: string | undefined;
       nombre: string;
     };
   };
 }
-function ModeladoRefineriaTorre(
+function ModeladoEmpresaTorre(
   { torre }: TorreProps,
   props: SVGProps<SVGSVGElement>
 ) {
@@ -118,7 +118,7 @@ function ModeladoRefineriaTorre(
         })}
       </defs>
       {/* Torre */}
-      <ModeladoRefineriaTorreSVG />
+      <ModeladoEmpresaTorreSVG />
       {/* Secciones */}
       {apiData.sections.map((section, index) => {
         const sectionY = towerY + index * sectionHeight;
@@ -174,7 +174,7 @@ function ModeladoRefineriaTorre(
               strokeLinecap="round"
             />
             {/* </g> */}
-            <ModeladoRefineriaTuberiaMaterial
+            <ModeladoEmpresaTuberiaMaterial
               x={towerX + towerWidth + 35}
               y={sectionY + sectionHeight / 2 + 10}
             />
@@ -212,4 +212,4 @@ function ModeladoRefineriaTorre(
   );
 }
 
-export default ModeladoRefineriaTorre;
+export default ModeladoEmpresaTorre;

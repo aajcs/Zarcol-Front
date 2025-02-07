@@ -1,12 +1,12 @@
 "use client";
 
 import DashboardEjemplo from "@/components/dashboardOpComponents/DashboardEjemplo";
-import DashboardRefinerias from "@/components/dashboardOpComponents/DashboardRefinerias";
+import DashboardEmpresas from "@/components/dashboardOpComponents/DashboardEmpresas";
 
 function Dashboard() {
   return (
     <>
-      <DashboardRefinerias />
+      <DashboardEmpresas />
       {/* <DashboardEjemplo /> */}
     </>
   );

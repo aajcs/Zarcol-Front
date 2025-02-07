@@ -28,7 +28,7 @@ function getFillColor(material: string): string {
   }
 }
 
-function ModeladoRefineriaTanque({ tanque }: TanqueProps) {
+function ModeladoEmpresaTanque({ tanque }: TanqueProps) {
   const [apiData, setApiData] = useState({ tankLevel: 0 }); // Nivel inicial
 
   // Simulación de la API (puedes reemplazar con tu llamada real)
@@ -221,4 +221,4 @@ function ModeladoRefineriaTanque({ tanque }: TanqueProps) {
   );
 }
 
-export default ModeladoRefineriaTanque;
+export default ModeladoEmpresaTanque;

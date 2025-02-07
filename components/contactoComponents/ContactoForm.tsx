@@ -10,7 +10,7 @@ import { contactoSchema } from "@/libs/zod";
 import { createContacto, updateContacto } from "@/app/api/contactoService";
 import { Toast } from "primereact/toast";
 import { Dropdown } from "primereact/dropdown";
-import { useRefineriaStore } from "@/store/refineriaStore";
+import { useEmpresaStore } from "@/store/empresaStore";
 import { Checkbox } from "primereact/checkbox";
 
 type FormData = z.infer<typeof contactoSchema>;
@@ -32,7 +32,7 @@ function ContactoForm({
   contactos,
   setContactos,
 }: ContactoFormProps) {
-  const { activeRefineria } = useRefineriaStore();
+  const { activeEmpresa } = useEmpresaStore();
   const toast = useRef<Toast | null>(null);
 
   const {
@@ -63,11 +63,11 @@ function ContactoForm({
         setContactos(updatedContactos);
         showToast("success", "Éxito", "Contacto actualizado");
       } else {
-        if (!activeRefineria)
+        if (!activeEmpresa)
           throw new Error("No se ha seleccionado una refinería");
         const newContacto = await createContacto({
           ...data,
-          id_refineria: activeRefineria.id,
+          id_empresa: activeEmpresa.id,
         });
         setContactos([...contactos, newContacto.contacto]);
         showToast("success", "Éxito", "Contacto creado");

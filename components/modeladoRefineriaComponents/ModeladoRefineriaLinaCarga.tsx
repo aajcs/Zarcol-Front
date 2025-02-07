@@ -2,7 +2,7 @@
 
 import React from "react";
 
-function ModeladoRefineriaLinaCarga() {
+function ModeladoEmpresaLinaCarga() {
   return (
     <svg
       width="700"
@@ -754,4 +754,4 @@ function ModeladoRefineriaLinaCarga() {
   );
 }
 
-export default ModeladoRefineriaLinaCarga;
+export default ModeladoEmpresaLinaCarga;

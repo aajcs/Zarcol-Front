@@ -24,7 +24,7 @@ export const profileSchema = object({
   acceso: string().min(1, "Debes seleccionar un acceso"),
 });
 
-export const refineriaSchema = object({
+export const empresaSchema = object({
   nombre: string().min(1, "El nombre es obligatorio"),
   estado: string().min(1, "Debes seleccionar un estado"),
   eliminado: boolean().default(false),
@@ -34,7 +34,7 @@ export const refineriaSchema = object({
   createdAt: string().optional(),
   updatedAt: string().optional(),
   id: string().optional(),
-  id_refineria: object({
+  id_empresa: object({
     _id: string(),
     nombre: string(),
   }).optional(),
@@ -60,7 +60,7 @@ export const torreDestilacionSchema = object({
       nombre: string(),
     })
   ).optional(),
-  id_refineria: object({
+  id_empresa: object({
     _id: string().optional(),
   }).optional(),
   createdAt: string().optional(),
@@ -76,7 +76,7 @@ export const tanqueSchema = object({
   material: array(string()).min(1, "El material es obligatorio"),
   capacidad: number().min(1, "La capacidad es obligatoria"),
   almacenamiento: number().min(1, "El almacenamiento es obligatorio"),
-  id_refineria: object({
+  id_empresa: object({
     _id: string().optional(),
   }).optional(),
   createdAt: string().optional(),
@@ -91,7 +91,7 @@ export const lineaRecepcionSchema = object({
   ubicacion: string().min(1, "La ubicación es obligatoria"),
   createdAt: string().optional(),
   updatedAt: string().optional(),
-  id_refineria: object({
+  id_empresa: object({
     _id: string().optional(),
   }).optional(),
 });
@@ -107,7 +107,7 @@ export const contactoSchema = object({
   direccion: string().min(1, "La dirección es obligatoria"),
   telefono: string().min(1, "El teléfono es obligatorio"),
   tipo: string().min(1, "El tipo es obligatorio"),
-  id_refineria: object({
+  id_empresa: object({
     _id: string().optional(),
   }).optional(),
   representanteLegal: string().min(1, "El representante legal es obligatorio"),

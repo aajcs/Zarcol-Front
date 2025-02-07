@@ -8,7 +8,7 @@ import { DataTable, DataTableFilterMeta } from "primereact/datatable";
 import { InputText } from "primereact/inputtext";
 import { Toast } from "primereact/toast";
 import { Dialog } from "primereact/dialog";
-import { useRefineriaStore } from "@/store/refineriaStore";
+import { useEmpresaStore } from "@/store/empresaStore";
 import {
   getLineaRecepcions,
   deleteLineaRecepcion,
@@ -24,14 +24,14 @@ interface LineaRecepcion {
   material: string;
   createdAt: string;
   updatedAt: string;
-  id_refineria: {
+  id_empresa: {
     _id: string | undefined;
     id: string;
   };
 }
 
 function LineaRecepcionList() {
-  const { activeRefineria } = useRefineriaStore();
+  const { activeEmpresa } = useEmpresaStore();
   const [lineaRecepcions, setLineaRecepcions] = useState<LineaRecepcion[]>([]);
   const [lineaRecepcion, setLineaRecepcion] = useState<LineaRecepcion | null>(
     null
@@ -49,7 +49,7 @@ function LineaRecepcionList() {
 
   useEffect(() => {
     fetchLineaRecepcions();
-  }, [activeRefineria]);
+  }, [activeEmpresa]);
 
   const fetchLineaRecepcions = async () => {
     try {
@@ -58,7 +58,7 @@ function LineaRecepcionList() {
       if (lineaRecepcionsDB && Array.isArray(lineaRecepcionsDB.linea_cargas)) {
         const filteredLineaRecepcions = lineaRecepcionsDB.linea_cargas.filter(
           (lineaRecepcion: LineaRecepcion) =>
-            lineaRecepcion.id_refineria._id === activeRefineria?.id
+            lineaRecepcion.id_empresa._id === activeEmpresa?.id
         );
         setLineaRecepcions(filteredLineaRecepcions);
       } else {

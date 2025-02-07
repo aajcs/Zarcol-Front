@@ -329,18 +329,18 @@ const AppMenu = () => {
       ],
     },
     {
-      label: "Gestión de Refinerias",
+      label: "Gestión de Empresas",
       icon: "pi pi-fw pi-user",
       items: [
         {
           label: "Lista",
           icon: "pi pi-fw pi-list",
-          to: "/refineria/list",
+          to: "/empresa/list",
         },
         {
           label: "Crear",
           icon: "pi pi-fw pi-plus",
-          to: "/refineria/create",
+          to: "/empresa/create",
         },
       ],
     },

@@ -13,7 +13,7 @@ import {
   getTorresDestilacion,
 } from "@/app/api/torreDestilacionService";
 import TorreDestilacionForm from "./TorreDestilacionForm";
-import { useRefineriaStore } from "@/store/refineriaStore";
+import { useEmpresaStore } from "@/store/empresaStore";
 
 interface TorreDestilacion {
   id: string;
@@ -24,14 +24,14 @@ interface TorreDestilacion {
   material: string;
   createdAt: string;
   updatedAt: string;
-  id_refineria: {
+  id_empresa: {
     _id: string | undefined;
     id: string;
   };
 }
 
 function TorreDestilacionList() {
-  const { activeRefineria } = useRefineriaStore();
+  const { activeEmpresa } = useEmpresaStore();
   const [torresDestilacion, setTorresDestilacion] = useState<
     TorreDestilacion[]
   >([]);
@@ -50,7 +50,7 @@ function TorreDestilacionList() {
 
   useEffect(() => {
     fetchTorresDestilacion();
-  }, [activeRefineria]);
+  }, [activeEmpresa]);
 
   const fetchTorresDestilacion = async () => {
     try {
@@ -58,7 +58,7 @@ function TorreDestilacionList() {
       if (torresDestilacionDB && Array.isArray(torresDestilacionDB.torres)) {
         const filteredTorresDestilacion = torresDestilacionDB.torres.filter(
           (torre: TorreDestilacion) =>
-            torre.id_refineria._id === activeRefineria?.id
+            torre.id_empresa._id === activeEmpresa?.id
         );
         setTorresDestilacion(filteredTorresDestilacion);
       } else {

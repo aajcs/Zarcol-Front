@@ -9,11 +9,11 @@ import React, { useEffect, useRef, useState } from "react";
 import { deleteUser } from "@/app/api/userService";
 import { Toast } from "primereact/toast";
 import { Dialog } from "primereact/dialog";
-import RefineriaForm from "./RefineriaForm";
-import { deleteRefineria, getRefinerias } from "@/app/api/refineriaService";
+import EmpresaForm from "./EmpresaForm";
+import { deleteEmpresa, getEmpresas } from "@/app/api/empresaService";
 
-function RefineriaList() {
-  interface Refineria {
+function EmpresaList() {
+  interface Empresa {
     id: string;
     nombre: string;
     correo: string;
@@ -22,14 +22,14 @@ function RefineriaList() {
     estado: string;
   }
 
-  const [refinerias, setRefinerias] = useState<Refineria[]>([]);
-  const [refineria, setRefineria] = useState<Refineria | null>(null);
+  const [empresas, setEmpresas] = useState<Empresa[]>([]);
+  const [empresa, setEmpresa] = useState<Empresa | null>(null);
 
   const [filters, setFilters] = useState<DataTableFilterMeta>({});
   const [loading, setLoading] = useState(true);
   const [globalFilterValue, setGlobalFilterValue] = useState("");
   const [deleteProductDialog, setDeleteProductDialog] = useState(false);
-  const [refineriaFormDialog, setRefineriaFormDialog] = useState(false);
+  const [empresaFormDialog, setEmpresaFormDialog] = useState(false);
 
   const router = useRouter();
   const dt = useRef(null);
@@ -43,9 +43,9 @@ function RefineriaList() {
 
   useEffect(() => {
     const fetchUsers = async () => {
-      const refineriasDB = await getRefinerias();
-      const { refinerias } = refineriasDB;
-      setRefinerias(refinerias);
+      const empresasDB = await getEmpresas();
+      const { empresas } = empresasDB;
+      setEmpresas(empresas);
       setLoading(false);
       initFilters();
     };
@@ -55,31 +55,31 @@ function RefineriaList() {
   const hideDeleteProductDialog = () => {
     setDeleteProductDialog(false);
   };
-  const hideRefineriaFormDialog = () => {
-    setRefineriaFormDialog(false);
+  const hideEmpresaFormDialog = () => {
+    setEmpresaFormDialog(false);
   };
   const deleteProduct = async () => {
-    let _refinerias = refinerias.filter((val) => val.id !== refineria?.id);
-    if (refineria?.id) {
-      const refineriaElminado = await deleteRefineria(refineria.id);
-      console.log(refineriaElminado);
-      setRefinerias(_refinerias);
+    let _empresas = empresas.filter((val) => val.id !== empresa?.id);
+    if (empresa?.id) {
+      const empresaElminado = await deleteEmpresa(empresa.id);
+      console.log(empresaElminado);
+      setEmpresas(_empresas);
       setDeleteProductDialog(false);
       toast.current?.show({
         severity: "success",
         summary: "Éxito",
-        detail: "Refineria Eliminado",
+        detail: "Empresa Eliminado",
         life: 3000,
       });
     } else {
       toast.current?.show({
         severity: "error",
         summary: "Error",
-        detail: "No se pudo eliminar el refineria",
+        detail: "No se pudo eliminar el empresa",
         life: 3000,
       });
     }
-    // setRefineria(emptyProduct);
+    // setEmpresa(emptyProduct);
   };
   const onGlobalFilterChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
@@ -103,10 +103,10 @@ function RefineriaList() {
     return (
       <div className="flex flex-wrap gap-2 align-items-center justify-content-between">
         {/* <div>
-          {refinerias.length > 0 ? (
-            <pre>{JSON.stringify(refinerias, null, 2)}</pre>
+          {empresas.length > 0 ? (
+            <pre>{JSON.stringify(empresas, null, 2)}</pre>
           ) : (
-            <p>No hay refinerias disponibles</p>
+            <p>No hay empresas disponibles</p>
           )}
         </div> */}
         <span className="p-input-icon-left w-full sm:w-20rem flex-order-1 sm:flex-order-0">
@@ -132,15 +132,15 @@ function RefineriaList() {
 
   const header = renderHeader();
 
-  const editRefineria = (refineria: any) => {
-    setRefineria(refineria);
-    setRefineriaFormDialog(true);
-    console.log(refineria);
+  const editEmpresa = (empresa: any) => {
+    setEmpresa(empresa);
+    setEmpresaFormDialog(true);
+    console.log(empresa);
   };
-  const confirmDeleteProduct = (refineria: any) => {
-    setRefineria(refineria);
+  const confirmDeleteProduct = (empresa: any) => {
+    setEmpresa(empresa);
     setDeleteProductDialog(true);
-    console.log(refineria);
+    console.log(empresa);
   };
   const actionBodyTemplate = (rowData: any) => {
     return (
@@ -150,7 +150,7 @@ function RefineriaList() {
           rounded
           severity="success"
           className="mr-2"
-          onClick={() => editRefineria(rowData)}
+          onClick={() => editEmpresa(rowData)}
         />
         <Button
           icon="pi pi-trash"
@@ -166,7 +166,7 @@ function RefineriaList() {
       <Toast ref={toast} />
       <DataTable
         ref={dt}
-        value={refinerias}
+        value={empresas}
         header={header}
         paginator
         rows={10}
@@ -231,31 +231,31 @@ function RefineriaList() {
             className="pi pi-exclamation-triangle mr-3"
             style={{ fontSize: "2rem" }}
           />
-          {refineria && (
+          {empresa && (
             <span>
-              ¿Estás seguro de que deseas eliminar <b>{refineria.nombre}</b>{" "}
-              <b>{refineria.correo}</b>?
+              ¿Estás seguro de que deseas eliminar <b>{empresa.nombre}</b>{" "}
+              <b>{empresa.correo}</b>?
             </span>
           )}
         </div>
       </Dialog>
       <Dialog
-        visible={refineriaFormDialog}
+        visible={empresaFormDialog}
         style={{ width: "850px" }}
-        header="Editar Refineria"
+        header="Editar Empresa"
         modal
         // footer={deleteProductDialogFooter}
-        onHide={hideRefineriaFormDialog}
+        onHide={hideEmpresaFormDialog}
       >
-        <RefineriaForm
-          refineria={refineria}
-          hideRefineriaFormDialog={hideRefineriaFormDialog}
-          refinerias={refinerias}
-          setRefinerias={setRefinerias}
+        <EmpresaForm
+          empresa={empresa}
+          hideEmpresaFormDialog={hideEmpresaFormDialog}
+          empresas={empresas}
+          setEmpresas={setEmpresas}
         />
       </Dialog>
     </div>
   );
 }
 
-export default RefineriaList;
+export default EmpresaList;

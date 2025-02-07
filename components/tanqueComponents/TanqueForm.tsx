@@ -10,7 +10,7 @@ import { tanqueSchema } from "@/libs/zod";
 import { createTanque, updateTanque } from "@/app/api/tanqueService";
 import { Toast } from "primereact/toast";
 import { Dropdown } from "primereact/dropdown";
-import { useRefineriaStore } from "@/store/refineriaStore";
+import { useEmpresaStore } from "@/store/empresaStore";
 import { Checkbox } from "primereact/checkbox";
 
 type FormData = z.infer<typeof tanqueSchema>;
@@ -37,7 +37,7 @@ function TanqueForm({
   tanques,
   setTanques,
 }: TanqueFormProps) {
-  const { activeRefineria } = useRefineriaStore();
+  const { activeEmpresa } = useEmpresaStore();
   const toast = useRef<Toast | null>(null);
   const [checkboxValue, setCheckboxValue] = useState<string[]>([]);
   console.log(tanque);
@@ -74,11 +74,11 @@ function TanqueForm({
         setTanques(updatedTanques);
         showToast("success", "Éxito", "Tanque actualizado");
       } else {
-        if (!activeRefineria)
+        if (!activeEmpresa)
           throw new Error("No se ha seleccionado una refinería");
         const newTorre = await createTanque({
           ...data,
-          id_refineria: activeRefineria.id,
+          id_empresa: activeEmpresa.id,
         });
         console.log(newTorre);
         setTanques([...tanques, newTorre.tanque]);

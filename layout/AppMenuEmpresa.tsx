@@ -1,18 +1,18 @@
-import { useRefineriaStore } from "@/store/refineriaStore";
+import { useEmpresaStore } from "@/store/empresaStore";
 import AppSubMenu from "./AppSubMenu";
 import type { MenuModel } from "@/types";
 
-const AppMenuRefineria = () => {
-  const { activeRefineria } = useRefineriaStore();
+const AppMenuEmpresa = () => {
+  const { activeEmpresa } = useEmpresaStore();
   const model: MenuModel[] = [
     {
-      label: activeRefineria?.nombre || "Seleciona una refinería",
+      label: activeEmpresa?.nombre || "Seleciona una refinería",
       icon: "pi pi-home",
       items: [
         {
           label: "Operaciones",
           icon: "pi pi-fw pi-home",
-          to: "/refineria",
+          to: "/empresa",
         },
         {
           label: "Finanzas",
@@ -23,49 +23,49 @@ const AppMenuRefineria = () => {
     },
 
     {
-      label: "Gestión de " + activeRefineria?.nombre,
+      label: "Gestión de " + activeEmpresa?.nombre,
       icon: "pi pi-fw pi-user",
       items: [
         {
           label: "Linea de Recepción",
           icon: "pi pi-fw pi-list",
-          to: "/refineria/linea-recepcion",
+          to: "/empresa/linea-recepcion",
         },
         {
           label: "Tanques",
           icon: "pi pi-fw pi-list",
-          to: "/refineria/tanques",
+          to: "/empresa/tanques",
         },
         {
           label: "Torres de Destilación",
           icon: "pi pi-fw pi-list",
-          to: "/refineria/torre-destilacion",
+          to: "/empresa/torre-destilacion",
         },
         {
           label: "Linea de Despacho",
           icon: "pi pi-fw pi-plus",
-          to: "/refineria/linea-despacho",
+          to: "/empresa/linea-despacho",
         },
         {
           label: "Contactos",
           icon: "pi pi-fw pi-plus",
-          to: "/refineria/contacto",
+          to: "/empresa/contacto",
         },
       ],
     },
     {
-      label: "Gestión de Refinerias",
+      label: "Gestión de Empresas",
       icon: "pi pi-fw pi-user",
       items: [
         {
           label: "Lista",
           icon: "pi pi-fw pi-list",
-          to: "/refineria/list",
+          to: "/empresa/list",
         },
         {
           label: "Crear",
           icon: "pi pi-fw pi-plus",
-          to: "/refineria/create",
+          to: "/empresa/create",
         },
       ],
     },
@@ -74,4 +74,4 @@ const AppMenuRefineria = () => {
   return <AppSubMenu model={model} />;
 };
 
-export default AppMenuRefineria;
+export default AppMenuEmpresa;

@@ -1,14 +1,14 @@
 "use client";
 
-import { useRefineriaStore } from "@/store/refineriaStore";
-import ModeladoRefineriaTanque from "./ModeladoRefineriaTanque";
-import ModeladoRefineriaTorre from "./ModeladoRefineriaTorre";
+import { useEmpresaStore } from "@/store/empresaStore";
+import ModeladoEmpresaTanque from "./ModeladoEmpresaTanque";
+import ModeladoEmpresaTorre from "./ModeladoEmpresaTorre";
 import { useEffect, useState } from "react";
 import { getTanques } from "@/app/api/tanqueService";
 import { getTorresDestilacion } from "@/app/api/torreDestilacionService";
-import ModeladoRefineriaLinaCarga from "./ModeladoRefineriaLinaCarga";
-import ModeladoRefineriaLineaDescarga from "./ModeladoRefineriaLineaDescarga";
-import ModeladoRefineriaTorreSVG from "./ModeladoRefineriaTorreSVG";
+import ModeladoEmpresaLinaCarga from "./ModeladoEmpresaLinaCarga";
+import ModeladoEmpresaLineaDescarga from "./ModeladoEmpresaLineaDescarga";
+import ModeladoEmpresaTorreSVG from "./ModeladoEmpresaTorreSVG";
 import { ProgressSpinner } from "primereact/progressspinner";
 
 interface Tanque {
@@ -22,7 +22,7 @@ interface Tanque {
   capacidad: number;
   createdAt: string;
   updatedAt: string;
-  id_refineria: {
+  id_empresa: {
     _id: string | undefined;
     id: string;
   };
@@ -37,14 +37,14 @@ interface TorreDestilacion {
   material: { estadoMaterial: string; posicion: string; nombre: string }[];
   createdAt: string;
   updatedAt: string;
-  id_refineria: {
+  id_empresa: {
     _id: string | undefined;
     nombre: string;
   };
 }
 
-function ModeladoRefineriaDashboard() {
-  const { activeRefineria } = useRefineriaStore();
+function ModeladoEmpresaDashboard() {
+  const { activeEmpresa } = useEmpresaStore();
   const [tanques, setTanques] = useState<Tanque[]>([]);
   const [torresDestilacion, setTorresDestilacion] = useState<
     TorreDestilacion[]
@@ -54,7 +54,7 @@ function ModeladoRefineriaDashboard() {
   // Obtener tanques y torres de destilación
   useEffect(() => {
     const fetchData = async () => {
-      if (activeRefineria?.id) {
+      if (activeEmpresa?.id) {
         await fetchTanques();
         await fetchTorresDestilacion();
         setLoading(false);
@@ -62,7 +62,7 @@ function ModeladoRefineriaDashboard() {
     };
 
     fetchData();
-  }, [activeRefineria]);
+  }, [activeEmpresa]);
 
   // Obtener tanques de la refinería activa
   const fetchTanques = async () => {
@@ -70,7 +70,7 @@ function ModeladoRefineriaDashboard() {
       const tanquesDB = await getTanques();
       if (tanquesDB && Array.isArray(tanquesDB.tanques)) {
         const filteredTanques = tanquesDB.tanques.filter(
-          (tanque: Tanque) => tanque.id_refineria._id === activeRefineria?.id
+          (tanque: Tanque) => tanque.id_empresa._id === activeEmpresa?.id
         );
         setTanques(filteredTanques);
       } else {
@@ -93,7 +93,7 @@ function ModeladoRefineriaDashboard() {
         const filteredTorresDestilacion = torresDestilacionDB.torres
           .filter(
             (torre: TorreDestilacion) =>
-              torre.id_refineria?._id === activeRefineria?.id
+              torre.id_empresa?._id === activeEmpresa?.id
           )
           .map((torre: TorreDestilacion) => {
             // Ordenar el array de materiales por la posición
@@ -128,7 +128,7 @@ function ModeladoRefineriaDashboard() {
                 .filter((tanque) => !tanque.material.includes("Petroleo Crudo"))
                 .map((tanque, index) => (
                   <div key={index} className="col-12 md:col-6">
-                    <ModeladoRefineriaLineaDescarga />
+                    <ModeladoEmpresaLineaDescarga />
                   </div>
                 ))}
             </div>
@@ -141,7 +141,7 @@ function ModeladoRefineriaDashboard() {
                 .filter((tanque) => tanque.material.includes("Petroleo Crudo"))
                 .map((tanque) => (
                   <div key={tanque.id} className="mb-2">
-                    <ModeladoRefineriaTanque tanque={tanque} />
+                    <ModeladoEmpresaTanque tanque={tanque} />
                   </div>
                 ))}
             </div>
@@ -156,8 +156,8 @@ function ModeladoRefineriaDashboard() {
               <div className="grid">
                 {torresDestilacion.map((torre) => (
                   <div key={torre.id} className="col-12 md:col-6">
-                    <ModeladoRefineriaTorre torre={torre} />
-                    <ModeladoRefineriaTorreSVG />
+                    <ModeladoEmpresaTorre torre={torre} />
+                    <ModeladoEmpresaTorreSVG />
                   </div>
                 ))}
               </div>
@@ -177,7 +177,7 @@ function ModeladoRefineriaDashboard() {
                   )
                   .map((tanque) => (
                     <div key={tanque.id} className="mb-2">
-                      <ModeladoRefineriaTanque tanque={tanque} />
+                      <ModeladoEmpresaTanque tanque={tanque} />
                     </div>
                   ))}
               </div>
@@ -193,7 +193,7 @@ function ModeladoRefineriaDashboard() {
                 .filter((tanque) => !tanque.material.includes("Petroleo Crudo"))
                 .map((tanque, index) => (
                   <div key={index} className="col-12 md:col-6">
-                    <ModeladoRefineriaLineaDescarga />
+                    <ModeladoEmpresaLineaDescarga />
                   </div>
                 ))}
             </div>
@@ -203,10 +203,10 @@ function ModeladoRefineriaDashboard() {
 
       {/* Línea de Carga */}
       <div className="mt-4">
-        <ModeladoRefineriaLinaCarga />
+        <ModeladoEmpresaLinaCarga />
       </div>
     </div>
   );
 }
 
-export default ModeladoRefineriaDashboard;
+export default ModeladoEmpresaDashboard;

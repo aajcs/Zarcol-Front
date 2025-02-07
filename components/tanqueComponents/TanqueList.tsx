@@ -9,7 +9,7 @@ import { InputText } from "primereact/inputtext";
 import { Toast } from "primereact/toast";
 import { Dialog } from "primereact/dialog";
 import TanqueForm from "./TanqueForm";
-import { useRefineriaStore } from "@/store/refineriaStore";
+import { useEmpresaStore } from "@/store/empresaStore";
 import { getTanques, deleteTanque } from "@/app/api/tanqueService";
 
 interface Tanque {
@@ -21,14 +21,14 @@ interface Tanque {
   material: string;
   createdAt: string;
   updatedAt: string;
-  id_refineria: {
+  id_empresa: {
     _id: string | undefined;
     id: string;
   };
 }
 
 function TanqueList() {
-  const { activeRefineria } = useRefineriaStore();
+  const { activeEmpresa } = useEmpresaStore();
   const [tanques, setTanques] = useState<Tanque[]>([]);
   const [tanque, setTanque] = useState<Tanque | null>(null);
   const [filters, setFilters] = useState<DataTableFilterMeta>({});
@@ -43,14 +43,14 @@ function TanqueList() {
 
   useEffect(() => {
     fetchTanques();
-  }, [activeRefineria]);
+  }, [activeEmpresa]);
 
   const fetchTanques = async () => {
     try {
       const tanquesDB = await getTanques();
       if (tanquesDB && Array.isArray(tanquesDB.tanques)) {
         const filteredTanques = tanquesDB.tanques.filter(
-          (tanque: Tanque) => tanque.id_refineria._id === activeRefineria?.id
+          (tanque: Tanque) => tanque.id_empresa._id === activeEmpresa?.id
         );
         setTanques(filteredTanques);
       } else {

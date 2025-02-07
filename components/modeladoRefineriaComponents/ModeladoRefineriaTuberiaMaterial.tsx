@@ -5,7 +5,7 @@ interface TuberiaMaterialProps {
   y: number;
 }
 
-const ModeladoRefineriaTuberiaMaterial: React.FC<TuberiaMaterialProps> = ({
+const ModeladoEmpresaTuberiaMaterial: React.FC<TuberiaMaterialProps> = ({
   x,
   y,
 }) => (
@@ -148,4 +148,4 @@ const ModeladoRefineriaTuberiaMaterial: React.FC<TuberiaMaterialProps> = ({
     </g>
   </g>
 );
-export default ModeladoRefineriaTuberiaMaterial;
+export default ModeladoEmpresaTuberiaMaterial;

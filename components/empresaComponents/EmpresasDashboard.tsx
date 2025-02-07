@@ -1,52 +1,52 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { getRefineria } from "@/app/api/refineriaService";
+import { getEmpresa } from "@/app/api/empresaService";
 import { useRouter } from "next/navigation";
-import { useRefineriaStore } from "@/store/refineriaStore";
+import { useEmpresaStore } from "@/store/empresaStore";
 
-function RefineriasDashboard() {
-  const [refineria, setRefineria] = useState<any>(null);
-  const { activeRefineria, setActiveRefineria } = useRefineriaStore();
-  console.log(activeRefineria);
+function EmpresasDashboard() {
+  const [empresa, setEmpresa] = useState<any>(null);
+  const { activeEmpresa, setActiveEmpresa } = useEmpresaStore();
+  console.log(activeEmpresa);
   const router = useRouter();
 
   useEffect(() => {
-    const fetchRefineria = async () => {
+    const fetchEmpresa = async () => {
       try {
-        if (!activeRefineria) {
+        if (!activeEmpresa) {
           return;
         }
-        const dataRefineria = await getRefineria(activeRefineria.id);
+        const dataEmpresa = await getEmpresa(activeEmpresa.id);
 
-        setRefineria(dataRefineria);
+        setEmpresa(dataEmpresa);
       } catch (error) {
         console.error("Error al obtener la refinería:", error);
       }
     };
 
-    fetchRefineria();
-  }, [activeRefineria]);
+    fetchEmpresa();
+  }, [activeEmpresa]);
 
-  const handleDivClick = (refineria: any) => {
-    setActiveRefineria(refineria);
-    router.push("/refineria");
+  const handleDivClick = (empresa: any) => {
+    setActiveEmpresa(empresa);
+    router.push("/empresa");
   };
 
   return (
     <div className="grid">
-      {/* <h1 className="text-4xl font-bold text-blue-500">{activeRefineriaId}</h1> */}
+      {/* <h1 className="text-4xl font-bold text-blue-500">{activeEmpresaId}</h1> */}
 
-      {refineria ? (
+      {empresa ? (
         <div
           className="col-12 lg:col-6 xl:col-3 clickable"
-          key={refineria.id}
-          onClick={() => handleDivClick(refineria)}
+          key={empresa.id}
+          onClick={() => handleDivClick(empresa)}
         >
           <div className="card p-0 overflow-hidden flex flex-column">
             <div className="flex align-items-center p-3">
               <img
-                src={refineria.img}
-                alt={refineria.nombre}
+                src={empresa.img}
+                alt={empresa.nombre}
                 width={100}
                 height={100}
                 // className="w-40 h-40 object-cover rounded-lg"
@@ -54,23 +54,23 @@ function RefineriasDashboard() {
               {/* <i className="pi pi-users text-6xl text-blue-500"></i> */}
               <div className="ml-3">
                 <span className="text-blue-500 block white-space-nowrap">
-                  {refineria.ubicacion}
+                  {empresa.ubicacion}
                 </span>
                 <span className="text-blue-500 block text-4xl font-bold">
-                  {refineria.nombre}
+                  {empresa.nombre}
                 </span>
                 <span className="text-blue-500 block white-space-nowrap">
-                  {refineria.nit}
+                  {empresa.nit}
                 </span>
               </div>
             </div>
           </div>
         </div>
       ) : (
-        <p className="text-gray-600">No hay refinerías disponibles</p>
+        <p className="text-gray-600">No hay empresa disponibles</p>
       )}
     </div>
   );
 }
 
-export default RefineriasDashboard;
+export default EmpresasDashboard;

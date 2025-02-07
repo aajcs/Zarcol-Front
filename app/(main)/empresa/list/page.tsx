@@ -1,9 +1,9 @@
 "use client";
 import { Page } from "../../../../types/layout";
-import RefineriaList from "@/components/refineriaComponents/RefineriaList";
+import EmpresaList from "@/components/empresaComponents/EmpresaList";
 
 const Login: Page = () => {
-  return <RefineriaList />;
+  return <EmpresaList />;
 };
 
 export default Login;

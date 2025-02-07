@@ -13,7 +13,7 @@ import {
 } from "@/app/api/torreDestilacionService";
 import { Toast } from "primereact/toast";
 import { Dropdown } from "primereact/dropdown";
-import { useRefineriaStore } from "@/store/refineriaStore";
+import { useEmpresaStore } from "@/store/empresaStore";
 import { Checkbox } from "primereact/checkbox";
 
 type FormData = z.infer<typeof torreDestilacionSchema>;
@@ -42,7 +42,7 @@ function TorreDestilacionForm({
   torresDestilacion,
   setTorresDestilacion,
 }: TorreDestilacionFormProps) {
-  const { activeRefineria } = useRefineriaStore();
+  const { activeEmpresa } = useEmpresaStore();
   const toast = useRef<Toast | null>(null);
   const [selectedMaterials, setSelectedMaterials] = useState<
     { estadoMaterial: string; posicion: string; nombre: string }[]
@@ -105,11 +105,11 @@ function TorreDestilacionForm({
         setTorresDestilacion(updatedTorres);
         showToast("success", "Éxito", "Torre de destilación actualizada");
       } else {
-        if (!activeRefineria)
+        if (!activeEmpresa)
           throw new Error("No se ha seleccionado una refinería");
         const newTorre = await createTorreDestilacion({
           ...requestData,
-          id_refineria: activeRefineria.id,
+          id_empresa: activeEmpresa.id,
         });
         setTorresDestilacion([...torresDestilacion, newTorre.torre]);
         showToast("success", "Éxito", "Torre de destilación creada");

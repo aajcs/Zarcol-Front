@@ -3,7 +3,7 @@ import React, { useContext } from "react";
 import AppMenu from "./AppMenu";
 import { LayoutContext } from "./context/layoutcontext";
 import { MenuProvider } from "./context/menucontext";
-import AppMenuRefineria from "./AppMenuRefineria";
+import AppMenuEmpresa from "./AppMenuEmpresa";
 import { usePathname } from "next/navigation";
 
 const AppSidebar = () => {
@@ -18,8 +18,8 @@ const AppSidebar = () => {
   };
 
   const renderMenu = () => {
-    if (pathname.startsWith("/refineria")) {
-      return <AppMenuRefineria />;
+    if (pathname.startsWith("/empresa")) {
+      return <AppMenuEmpresa />;
     } else {
       return <AppMenu />;
     }

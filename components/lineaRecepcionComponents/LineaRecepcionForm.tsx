@@ -13,7 +13,7 @@ import {
 } from "@/app/api/lineaRecepcionService";
 import { Toast } from "primereact/toast";
 import { Dropdown } from "primereact/dropdown";
-import { useRefineriaStore } from "@/store/refineriaStore";
+import { useEmpresaStore } from "@/store/empresaStore";
 import { Checkbox } from "primereact/checkbox";
 
 type FormData = z.infer<typeof lineaRecepcionSchema>;
@@ -34,7 +34,7 @@ function LineaRecepcionForm({
   lineaRecepcions,
   setLineaRecepcions,
 }: LineaRecepcionFormProps) {
-  const { activeRefineria } = useRefineriaStore();
+  const { activeEmpresa } = useEmpresaStore();
   const toast = useRef<Toast | null>(null);
   console.log(lineaRecepcion);
 
@@ -72,11 +72,11 @@ function LineaRecepcionForm({
         setLineaRecepcions(updatedLineaRecepcions);
         showToast("success", "Éxito", "LineaRecepcion actualizado");
       } else {
-        if (!activeRefineria)
+        if (!activeEmpresa)
           throw new Error("No se ha seleccionado una refinería");
         const newTorre = await createLineaRecepcion({
           ...data,
-          id_refineria: activeRefineria.id,
+          id_empresa: activeEmpresa.id,
         });
         console.log(newTorre);
         setLineaRecepcions([...lineaRecepcions, newTorre.linea_carga]);

@@ -8,7 +8,7 @@ import { DataTable, DataTableFilterMeta } from "primereact/datatable";
 import { InputText } from "primereact/inputtext";
 import { Toast } from "primereact/toast";
 import { Dialog } from "primereact/dialog";
-import { useRefineriaStore } from "@/store/refineriaStore";
+import { useEmpresaStore } from "@/store/empresaStore";
 import { deleteContacto, getContactos } from "@/app/api/contactoService";
 import ContactoForm from "./ContactoForm";
 
@@ -21,14 +21,14 @@ interface Contacto {
   material: string;
   createdAt: string;
   updatedAt: string;
-  id_refineria: {
+  id_empresa: {
     _id: string | undefined;
     id: string;
   };
 }
 
 function ContactoList() {
-  const { activeRefineria } = useRefineriaStore();
+  const { activeEmpresa } = useEmpresaStore();
   const [contactos, setContactos] = useState<Contacto[]>([]);
   const [contacto, setContacto] = useState<Contacto | null>(null);
   const [filters, setFilters] = useState<DataTableFilterMeta>({});
@@ -43,15 +43,14 @@ function ContactoList() {
 
   useEffect(() => {
     fetchContactos();
-  }, [activeRefineria]);
+  }, [activeEmpresa]);
 
   const fetchContactos = async () => {
     try {
       const contactosDB = await getContactos();
       if (contactosDB && Array.isArray(contactosDB.contactos)) {
         const filteredContactos = contactosDB.contactos.filter(
-          (contacto: Contacto) =>
-            contacto.id_refineria._id === activeRefineria?.id
+          (contacto: Contacto) => contacto.id_empresa._id === activeEmpresa?.id
         );
         setContactos(filteredContactos);
       } else {
@@ -209,7 +208,7 @@ function ContactoList() {
         />
         <Column field="tipo" header="Tipo" sortable style={{ width: "20%" }} />
         <Column
-          field="id_refineria.nombre"
+          field="id_empresa.nombre"
           header="ID Refinería"
           sortable
           style={{ width: "20%" }}

@@ -1,5 +1,5 @@
 import * as React from "react";
-const ModeladoRefineriaLineaDescarga = (props: any) => (
+const ModeladoEmpresaLineaDescarga = (props: any) => (
   <svg
     id="eDfk30VHEwb1"
     xmlns="http://www.w3.org/2000/svg"
@@ -5442,4 +5442,4 @@ const ModeladoRefineriaLineaDescarga = (props: any) => (
     <script />
   </svg>
 );
-export default ModeladoRefineriaLineaDescarga;
+export default ModeladoEmpresaLineaDescarga;

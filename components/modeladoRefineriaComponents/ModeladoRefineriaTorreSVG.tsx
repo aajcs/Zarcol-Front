@@ -1,6 +1,6 @@
 import * as React from "react";
 import { SVGProps } from "react";
-const ModeladoRefineriaTorreSVG = (props: SVGProps<SVGSVGElement>) => (
+const ModeladoEmpresaTorreSVG = (props: SVGProps<SVGSVGElement>) => (
   <>
     <defs>
       <linearGradient
@@ -494,4 +494,4 @@ const ModeladoRefineriaTorreSVG = (props: SVGProps<SVGSVGElement>) => (
     </g>
   </>
 );
-export default ModeladoRefineriaTorreSVG;
+export default ModeladoEmpresaTorreSVG;
