@@ -1,0 +1,120 @@
+.bg-image-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.bg-image-container .background-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* z-index: -1; */
+  animation: zoomInOut 20s infinite;
+}
+
+.bg-image-container .content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+@keyframes zoomInOut {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.animate-zoomOutIn {
+  animation: zoomInOut 20s infinite;
+}
+.transparent-button {
+  background-color: transparent;
+  color: var(--text-color-secondary);
+  transition: color 0.3s, background-color 0.3s;
+
+  &:hover {
+    color: var(--primary-color);
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+}
+
+.testimonial-card {
+  background-color: var(--surface-card);
+  border-radius: 14px;
+  padding: 1.5rem;
+  box-shadow: var(--shadow-2);
+  transition: transform 0.3s;
+
+  &:hover {
+    transform: translateY(-25px);
+  }
+}
+.cliente-card {
+  transition: transform 0.3s;
+
+  &:hover {
+    transform: scale(1.5);
+  }
+}
+.mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Negro transparente */
+  z-index: 1;
+  pointer-events: none; /* Permite hacer clic en el contenido debajo de la máscara */
+}
+.responsive-dialog {
+  width: 50vw;
+}
+
+@media (max-width: 768px) {
+  .responsive-dialog {
+    width: 100vw !important;
+    height: 100vh !important;
+    max-width: 100vw;
+    max-height: 100vh;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+.logoPrincipal {
+  width: 60rem;
+}
+
+@media (max-width: 1200px) {
+  .logoPrincipal {
+    width: 50rem;
+  }
+}
+
+@media (max-width: 992px) {
+  .logoPrincipal {
+    width: 40rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .logoPrincipal {
+    width: 30rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .logoPrincipal {
+    width: 25rem;
+  }
+}
