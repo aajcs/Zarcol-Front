@@ -4,9 +4,10 @@ import { getEmpresa } from "@/app/api/empresaService";
 import { useRouter } from "next/navigation";
 import { useEmpresaStore } from "@/store/empresaStore";
 
-function EmpresasDashboard() {
+function EmpresasDashboardMalo() {
   const [empresa, setEmpresa] = useState<any>(null);
   const { activeEmpresa, setActiveEmpresa } = useEmpresaStore();
+
   console.log(activeEmpresa);
   const router = useRouter();
 
@@ -73,4 +74,4 @@ function EmpresasDashboard() {
   );
 }
 
-export default EmpresasDashboard;
+export default EmpresasDashboardMalo;
